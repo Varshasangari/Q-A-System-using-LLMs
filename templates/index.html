@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question-Answering System using LLMs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+    </div>
+
+    <!-- Header/Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1 class="glow-text">
+                    <span class="gradient-text">Question-Answering System</span>
+                    <span class="subtitle-gradient">using Large Language Models</span>
+                </h1>
+                <p class="hero-subtitle">
+                    An AI-powered web application that answers your questions using state-of-the-art 
+                    Large Language Models and Natural Language Processing
+                </p>
+                <div class="hero-description">
+                    This project demonstrates how LLMs can be used to build intelligent question-answering systems. 
+                    Type your question below and receive instant, human-like responses powered by deep learning.
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main QA Section -->
+    <main class="qa-section">
+        <div class="container">
+            <!-- Question Input Card -->
+            <div class="card qa-card fade-in-up">
+                <div class="card-header">
+                    <h2><span class="icon">💬</span> Ask Your Question</h2>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <textarea 
+                            id="questionInput" 
+                            placeholder="Type your question here... (e.g., What is deep learning?)"
+                            rows="4"
+                            maxlength="1000"
+                        ></textarea>
+                        <div class="char-count">
+                            <span id="charCount">0</span>/1000
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button id="askBtn" class="btn btn-primary">
+                            <span class="btn-text">Ask Question</span>
+                            <span class="btn-loader" style="display: none;">
+                                <span class="spinner"></span>
+                                Generating Answer...
+                            </span>
+                        </button>
+                        <button id="clearBtn" class="btn btn-secondary">Clear</button>
+                    </div>
+
+                    <!-- Example Question Chips -->
+                    <div class="example-chips">
+                        <p class="chip-label">Try these examples:</p>
+                        <div class="chip-container">
+                            <button class="chip" data-question="What is deep learning?">What is deep learning?</button>
+                            <button class="chip" data-question="Explain CNN in simple words">CNN explained simply</button>
+                            <button class="chip" data-question="What is overfitting in machine learning?">What is overfitting?</button>
+                            <button class="chip" data-question="Difference between supervised and unsupervised learning">Supervised vs Unsupervised</button>
+                            <button class="chip" data-question="What is backpropagation?">What is backpropagation?</button>
+                            <button class="chip" data-question="Explain transfer learning">Transfer learning</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Answer Display Card -->
+            <div id="answerCard" class="card answer-card fade-in-up" style="display: none;">
+                <div class="card-header">
+                    <h2><span class="icon">✨</span> AI-Generated Answer</h2>
+                    <button id="copyBtn" class="btn-icon" title="Copy answer">📋</button>
+                </div>
+                <div class="card-body">
+                    <div class="answer-content">
+                        <div class="answer-section">
+                            <h3 class="section-title">🎯 Quick Answer</h3>
+                            <p id="shortAnswer" class="answer-text"></p>
+                        </div>
+                        
+                        <div class="answer-section">
+                            <h3 class="section-title">📚 Detailed Explanation</h3>
+                            <p id="detailedExplanation" class="answer-text"></p>
+                        </div>
+                        
+                        <div class="answer-section">
+                            <h3 class="section-title">💡 Example</h3>
+                            <p id="exampleText" class="answer-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorCard" class="card error-card fade-in-up" style="display: none;">
+                <div class="card-body">
+                    <div class="error-message">
+                        <span class="error-icon">⚠️</span>
+                        <span id="errorText"></span>
+                    </div>
+                    <button id="retryBtn" class="btn btn-primary">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-heading fade-in">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Powered Answers</h3>
+                    <p>Generate intelligent responses using state-of-the-art Large Language Models</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fast Response</h3>
+                    <p>Get instant answers to your questions in real-time with minimal latency</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Natural Understanding</h3>
+                    <p>Advanced NLP enables comprehension of complex questions and context</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">💻</div>
+                    <h3>User-Friendly Interface</h3>
+                    <p>Clean, modern design optimized for seamless user experience</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">📱</div>
+                    <h3>Fully Responsive</h3>
+                    <p>Works perfectly on desktop, laptop, tablet, and mobile devices</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Academic Support</h3>
+                    <p>Perfect for learning, research, and educational purposes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-heading fade-in">About This Project</h2>
+            <div class="about-content fade-in-up">
+                <div class="about-card">
+                    <h3>🧠 What are Large Language Models?</h3>
+                    <p>
+                        Large Language Models (LLMs) are advanced deep learning models trained on massive amounts of text data. 
+                        They use transformer architectures with billions of parameters to understand and generate human-like text. 
+                        These models learn patterns, relationships, and contextual understanding from their training data.
+                    </p>
+                </div>
+                <div class="about-card">
+                    <h3>🚀 Why Question-Answering Systems Matter</h3>
+                    <p>
+                        QA systems represent one of the most practical applications of AI, bridging the gap between human curiosity 
+                        and machine intelligence. They're used in customer support, education, research, healthcare, and countless 
+                        other domains where quick, accurate information access is crucial.
+                    </p>
+                </div>
+                <div class="about-card">
+                    <h3>📖 Educational Value</h3>
+                    <p>
+                        This project demonstrates core concepts in natural language processing, deep learning, and full-stack web 
+                        development. It showcases how modern AI can be integrated into accessible web applications, making advanced 
+                        technology available to everyone through an intuitive interface.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <h3>Question-Answering System using LLMs</h3>
+                    <p>Built for AI & Deep Learning Project Demonstration</p>
+                </div>
+                <div class="footer-info">
+                    <p>Powered by Flask • Modern Web Technologies • Neural Networks</p>
+                    <p class="copyright">© 2026 - Educational Purpose Only</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
